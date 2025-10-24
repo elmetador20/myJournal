@@ -2,9 +2,12 @@ package com.project.myproject.controller;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,24 +36,29 @@ public class JournlEntryControllerV2 {
 
 
    @PostMapping
-    public JournalEntry createEntry(@RequestBody JournalEntry myEntry){
-      myEntry.setDate(LocalDateTime.now());
+    public ResponseEntity<JournalEntry> createEntry(@RequestBody JournalEntry myEntry){
+      try {
+         myEntry.setDate(LocalDateTime.now());
       journalEntryService.saveEntry(myEntry);
-      
-    
-      return myEntry;
-   
-
+      return new ResponseEntity<>(HttpStatus.CREATED);
+      } catch (Exception e) {
+      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+      }
+     
    }
    @GetMapping("id/{myId}")
    //@pathVariable <datatype> <variable name given in getmapping>
-   public JournalEntry getJournalEntryByIdEntry(@PathVariable ObjectId myId){
-     return journalEntryService.findById(myId).orElse(null);//direct return ni krwa paenge kyuki iska datatype optional hainto orelse lgaenge
+   public ResponseEntity<JournalEntry>  getJournalEntryByIdEntry(@PathVariable ObjectId myId){
+      Optional<JournalEntry>journalEntry=journalEntryService.findById(myId);
+      if(journalEntry.isPresent()){
+         return new ResponseEntity<>(journalEntry.get(),HttpStatus.OK);
+      }
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
    }
   @DeleteMapping("id/{myId}")
-   public boolean deleteJournalEntryById(@PathVariable ObjectId myId){
+   public ResponseEntity<?>deleteJournalEntryById(@PathVariable ObjectId myId){
     journalEntryService.deleteById(myId);
-    return true;
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
 
    }

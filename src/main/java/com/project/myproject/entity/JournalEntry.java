@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.mongodb.lang.NonNull;
+
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +20,7 @@ public class JournalEntry {
   // @ID se hmne map kr di as a primary key jo age use kia hai Repository me
   @Id
   private ObjectId id;
+  @NonNull
   private String title;
   private String content;
   private LocalDateTime date;

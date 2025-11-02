@@ -30,7 +30,7 @@ public List<User> getAllUsers(){
 }
 @PostMapping
 public void  createUser(@RequestBody User user){
-   userService.saveEntry(user);
+   userService.saveNewUser(user);
 }
 @PutMapping("/{userName}")
 public ResponseEntity<?> updateUser(@RequestBody User user, @PathVariable String userName ){

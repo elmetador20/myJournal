@@ -19,6 +19,7 @@ import lombok.Data;
   @Document(collection="users")
   @Data
   public class User{
+    
 
     @Id
      private ObjectId id;
@@ -30,6 +31,9 @@ import lombok.Data;
      @DBRef//refrence create kr rhe hai user collections ke andr journalentries ka
 
      private List<JournalEntry> journalEntries=new ArrayList<>();
+     private List<String> role;
+     
+     
   }
 
 

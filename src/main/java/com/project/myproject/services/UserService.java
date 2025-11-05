@@ -19,14 +19,15 @@ public class UserService {
 @Autowired
   private UserRepository userRepository;
 
-  public void saveEntry(User user){
-    userRepository.save(user);
-  }
+  
   private static final PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
 
   public void saveNewUser(User user){
     user.setPassword(passwordEncoder.encode(user.getPassword()));
     user.setRole(Arrays.asList("user"));
+    userRepository.save(user);
+  }
+  public void saveEntry(User user){
     userRepository.save(user);
   }
  public List<User> getAll(){return userRepository.findAll();}

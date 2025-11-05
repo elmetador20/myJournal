@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,15 +22,24 @@ public class JournalEntryService {
   private JournalEntryRepository journalEntryRepository;
   @Autowired
   private UserService userService;
-
+ 
   @Transactional
    public void saveEntry(JournalEntry journalEntry, String userName) {
-    User user = userService.findbyUserName(userName);
+    try {  
+       User user = userService.findbyUserName(userName);
     journalEntry.setDate(LocalDateTime.now());
     JournalEntry saved = journalEntryRepository.save(journalEntry);
     user.getJournalEntries().add(saved);
     userService.saveUser(user);
   }
+
+        
+    catch (Exception e) {
+      System.out.println(e);
+      throw new RuntimeException("an error occired");
+    }
+  }
+ 
 
   public void saveEntry(JournalEntry journalEntry  ) {
     journalEntryRepository.save(journalEntry);

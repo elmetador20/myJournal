@@ -1,0 +1,22 @@
+<configuraton>
+  <appender name="myConsoleAppender" class="ch.qos.core.ConsoleAppender">
+      <encoder>
+      <patttern>
+          %d{hh:mm:ss} [%thread] %-5level %logger{36} - %msg%n
+      </patttern>
+      </encoder>
+
+  </appender>
+   <appender name="myfileAppender" class="ch.qos.core.FileAppender">
+       <file>
+        myProject.log
+        </file> 
+
+  </appender>
+
+  <root level="INFO">
+      <appender-ref ref="myConsoleAppender"/>
+      <appender-ref ref="myFileAppender"/>
+  </root>
+
+</configuraton>

@@ -1,0 +1,24 @@
+# spring.application.name=myproject
+# spring.data.mongodb.host=localhost
+# spring.data.mongodb.port=27017
+# spring.data.mongodb.database=journaldb
+# spring.application.name=myproject
+# spring.data.mongodb.uri=mongodb+srv://ahmedsharique250:Elmetador20@cluster0.tkbpp5p.mongodb.net/?appName=Cluster0
+# spring.data.mongodb.auto-index-creation=
+server:
+  port: 8080
+  servlet:
+    context-path: /myproject
+
+spring:
+  application:
+    name: myproject
+
+  data:
+    mongodb:
+      uri: mongodb+srv://ahmedsharique250:Elmetador20@cluster0.tkbpp5p.mongodb.net/?appName=Cluster0
+      database: journaldb
+      auto-index-creation: true
+
+
+    

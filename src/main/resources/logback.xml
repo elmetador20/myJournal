@@ -1,22 +1,27 @@
 <configuraton>
   <appender name="myConsoleAppender" class="ch.qos.core.ConsoleAppender">
-      <encoder>
+    <encoder>
       <patttern>
           %d{hh:mm:ss} [%thread] %-5level %logger{36} - %msg%n
       </patttern>
-      </encoder>
+    </encoder>
 
   </appender>
-   <appender name="myfileAppender" class="ch.qos.core.FileAppender">
-       <file>
+  <appender name="myfileAppender" class="ch.qos.core.FileAppender">
+    <encoder>
+      <patttern>
+          %d{hh:mm:ss} [%thread] %-5level %logger{36} - %msg%n
+      </patttern>
+    </encoder>
+    <file>
         myProject.log
-        </file> 
+    </file>
 
   </appender>
 
   <root level="INFO">
-      <appender-ref ref="myConsoleAppender"/>
-      <appender-ref ref="myFileAppender"/>
+    <appender-ref ref="myConsoleAppender"/>
+    <appender-ref ref="myFileAppender"/>
   </root>
 
 </configuraton>
